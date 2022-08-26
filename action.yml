@@ -32,6 +32,10 @@ runs:
       shell: bash
       run: export PATH=$PATH:$HOME/.dotnet/tools
 
+    - name: Update bashrc
+      shell: bash
+      run: . ~/.bashrc
+
     - name: Restore tools
       shell: bash
       run: dotnet tool restore
