@@ -28,18 +28,6 @@ runs:
       shell: bash
       run: dotnet tool install --global dotnet-ef
 
-    - name: Add dotnet ef tool to PATH
-      shell: bash
-      run: export PATH=$PATH:$HOME/.dotnet/tools
-
-    - name: Update bashrc
-      shell: bash
-      run: . ~/.bashrc
-
-    - name: Restore tools
-      shell: bash
-      run: dotnet tool restore
-
     - name: Update database
       shell: bash
       env:
@@ -47,7 +35,11 @@ runs:
         STARTUP_PROJECT_PATH: ${{ inputs.startup-project-path }}
         CONTEXT: ${{ inputs.context }}
         CONNECTION: ${{ inputs.connection }}
-      run: dotnet ef database update --verbose --project=$PROJECT_PATH --startup-project=$STARTUP_PROJECT_PATH --context $CONTEXT -- --connection $CONNECTION
+      run: |
+        export PATH=$PATH:$HOME/.dotnet/tools
+        . ~/.bashrc
+        dotnet tool restore
+        dotnet ef database update --verbose --project=$PROJECT_PATH --startup-project=$STARTUP_PROJECT_PATH --context $CONTEXT -- --connection $CONNECTION
 
     - name: Uninstall dotnet-ef tool
       shell: bash
