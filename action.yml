@@ -7,9 +7,6 @@ inputs:
   project-path:
     description: "The path for the project that holds the migrations folder"
     required: true
-  startup-project-path:
-    description: "The startup project of the application"
-    required: true
   context:
     description: "The DbContext class name"
     required: true
@@ -32,14 +29,13 @@ runs:
       shell: bash
       env:
         PROJECT_PATH: ${{ inputs.project-path }}
-        STARTUP_PROJECT_PATH: ${{ inputs.startup-project-path }}
         CONTEXT: ${{ inputs.context }}
         CONNECTION: ${{ inputs.connection }}
       run: |
         export PATH=$PATH:$HOME/.dotnet/tools
         . ~/.bashrc
         dotnet tool restore
-        dotnet ef database update --verbose --project=$PROJECT_PATH --startup-project=$STARTUP_PROJECT_PATH --context $CONTEXT -- --connection $CONNECTION
+        dotnet ef database update --verbose --project=$PROJECT_PATH --context $CONTEXT --connection $CONNECTION
 
     - name: Uninstall dotnet-ef tool
       shell: bash
