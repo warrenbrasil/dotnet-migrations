@@ -39,7 +39,7 @@ runs:
         export PATH=$PATH:$HOME/.dotnet/tools
         . ~/.bashrc
         dotnet tool restore
-        dotnet ef database update --verbose --project=$PROJECT_PATH --startup-project=$STARTUP_PROJECT_PATH --context $CONTEXT -- --connection $CONNECTION
+        dotnet ef database update --verbose --project=$PROJECT_PATH --startup-project=$STARTUP_PROJECT_PATH --context $CONTEXT --connection $CONNECTION
 
     - name: Uninstall dotnet-ef tool
       shell: bash

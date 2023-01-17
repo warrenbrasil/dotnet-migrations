@@ -24,7 +24,7 @@ This action is responsible for applying .NET migrations to a database
 
 ```yml
 - name: Warren - Configure .NET SDK
-  uses: warrenbrasil/dotnet-migrations@v1
+  uses: warrenbrasil/dotnet-migrations@v2
   with:
     project-path: ./src/FooProject
     startup-project-path: ./src/FooProject.API
