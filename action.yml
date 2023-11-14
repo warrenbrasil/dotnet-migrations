@@ -10,6 +10,10 @@ inputs:
   startup-project-path:
     description: "The startup project of the application"
     required: true
+  dotnet-ef-version:
+    description: "The version of dotnet-ef tool"
+    required: false
+    default: ""
   context:
     description: "The DbContext class name"
     required: true
@@ -25,8 +29,16 @@ runs:
       run: dotnet tool uninstall --global dotnet-ef || true
 
     - name: Install dotnet ef tool
+      if: ${{ inputs.dotnet-ef-version == '' }}
       shell: bash
       run: dotnet tool install --global dotnet-ef
+
+    - name: Install dotnet ef tool
+      if: ${{ inputs.dotnet-ef-version != '' }}
+      shell: bash
+      env:
+        VERSION: ${{ inputs.dotnet-ef-version }}
+      run: dotnet tool install --global dotnet-ef --version $VERSION
 
     - name: Update database
       shell: bash
