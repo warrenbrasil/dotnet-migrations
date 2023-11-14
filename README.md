@@ -32,7 +32,7 @@ This action is responsible for applying .NET migrations to a database
   with:
     project-path: ./src/FooProject
     startup-project-path: ./src/FooProject.API
-    dotnet-ef-version
+    dotnet-ef-version: 7.0.14
     context: FooDbContext
     connection: <CONNECTION_STRING_GOES_HERE>
 ```
